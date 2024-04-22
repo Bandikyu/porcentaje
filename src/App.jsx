@@ -3,7 +3,9 @@ import './App.css';
 
 function App() {
   const [fetchData, setFetchData] = useState('');
-  const [percentages, setPercentages] = useState('');
+  const [percentages, setPercentages] = useState(
+    JSON.parse(localStorage.getItem('percentages')) || {}
+  );
   const [now, setNow] = useState('');
 
   useEffect(() => {
@@ -63,6 +65,7 @@ function App() {
           }
     
           setPercentages(percentages);
+          localStorage.setItem('percentages', JSON.stringify(percentages));
           
         }
       }, 1000); // Ejecutar cada 5 segundos (5000 milisegundos)
@@ -98,10 +101,10 @@ function App() {
 
   return (
     <>
-    <div className='container' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
+    <div className='container' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '9px' }}>
       <h1>Porcentaje</h1>
       {Object.entries(percentages).map(([key, value]) => (
-        <div key={key} style={{ position: 'relative', width: '300px', height: '30px', backgroundColor: '#ddd' }}>
+        <div className='bar' key={key} style={{ position: 'relative', width: '300px', backgroundColor: '#ddd' }}>
           <div
             style={{
               position: 'absolute',
@@ -113,8 +116,8 @@ function App() {
               transition: 'width 0.5s ease-in-out',
             }}
           />
-          <p style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}>
-            {key} {value}
+          <p className='text' style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}>
+            <span>{key}</span> <span>{value}</span>
           </p>
         </div>
       ))}

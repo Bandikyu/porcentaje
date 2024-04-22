@@ -3,10 +3,30 @@ body {
   height: 100vh;
   align-items: center;
   justify-content: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
+  font-weight: bold !important;
+  color: rgb(46, 46, 46) !important;
 }
 .container {
   margin-top: -20vh;
   border-radius: 15px;
   background-color: rgba(243, 243, 243, 0.735);
   padding: 30px 25px;
+}
+
+.bar {
+  height: 35px;
+  border-radius: 5px;
+}
+.bar > div {
+  border-radius: 5px;
+}
+
+.text {
+  /* border: 2px solid; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 7px;
 }
