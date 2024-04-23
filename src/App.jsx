@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import MyCanvas from './MyCanvas';
 
 function App() {
   const [fetchData, setFetchData] = useState('');
@@ -101,7 +102,10 @@ function App() {
 
   return (
     <>
-    <div className='container' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '9px' }}>
+    <div style={{ position:'absolute', top:0 , left:0, right:0, width:'100%', height:'100%' }}>
+      <MyCanvas />
+    </div>
+    <div className='container' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '9px', position:'relative' }}>
       <h1>Porcentaje</h1>
       {Object.entries(percentages).map(([key, value]) => (
         <div className='bar' key={key} style={{ position: 'relative', width: '300px', backgroundColor: '#ddd' }}>
@@ -111,7 +115,7 @@ function App() {
               left: 0,
               top: 0,
               height: '100%',
-              backgroundColor: value === '✔' ? '#a7cfa7' : '#8e8ec2',
+              backgroundColor: value === '✔' ? 'transparent' : '#8e8ec2',
               width: `${value === '✔' ? '100%' : value + '%'}`,
               transition: 'width 0.5s ease-in-out',
             }}
