@@ -8,6 +8,7 @@ function App() {
     JSON.parse(localStorage.getItem('percentages')) || {}
   );
   const [now, setNow] = useState('');
+  const [coloreado , setColoreado] = useState('');
 
   useEffect(() => {
     const myHeaders = new Headers();
@@ -18,7 +19,7 @@ function App() {
       redirect: "follow"
     };
   
-    const fetchData = async () => {
+    const fetchD = async () => {
       try {
         const response = await fetch("https://script.google.com/macros/s/AKfycbylQBqT-xo_d_VntkONt-_qp52LBT_MRoVAs7kJfx7_fp82NKNmk5LQzKE0jSAPeaa02A/exec", requestOptions);
         const result = await response.text();
@@ -27,8 +28,9 @@ function App() {
         console.error(error);
       }
     };
-  
-    fetchData();
+    
+    fetchD();
+    '👑' in percentages ? setColoreado(percentages['👑']) : false;
   }, []);
 
   useEffect(() => {
@@ -60,7 +62,7 @@ function App() {
             const duration = endDate.getTime() - startDate.getTime();
             const elapsed = now.getTime() - startDate.getTime();
     
-            //ver esto luego, no puede ser nunca myor a 100
+            //ver esto luego, nunca puede ser  mayor a 100
             const percentage = (duration > elapsed && (100 - ((elapsed / duration)) * 100).toFixed(4) < 100) ? (100 - ((elapsed / duration)) * 100).toFixed(2) : "✔";
             percentages[key] = percentage;
           }
@@ -103,7 +105,7 @@ function App() {
   return (
     <>
     <div style={{ position:'absolute', top:0 , left:0, right:0, width:'100%', height:'100%' }}>
-      <MyCanvas />
+      <MyCanvas coloreado = {Math.trunc((80/100*(100-coloreado))*12)} />
     </div>
     <div className='container' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '9px', position:'relative' }}>
       <h1>Porcentaje</h1>

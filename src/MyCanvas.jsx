@@ -1,7 +1,9 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-const MyCanvas = () => {
+const MyCanvas = (props) => {
   const canvasRef = useRef(null);
+  const coloreado = props.coloreado;
+  console.log("🚀 ~ MyCanvas ~ coloreado:", coloreado)
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -20,7 +22,7 @@ const MyCanvas = () => {
     const gapGrande = 2; // Gap entre rectángulos grandes
     const gapChico = 1; // Gap entre rectángulos chicos
     const opacidadGrande = 0.5; // Opacidad de los rectángulos grandes (valor entre 0 y 1)
-    const colorSquad = 382; // Número de rectángulos pequeños que se colorearán de azul LO TENGO QUE PASAR CON UNA PROP
+    const colorSquad = coloreado; // Número de rectángulos pequeños que se colorearán de azul LO TENGO QUE PASAR CON UNA PROP
 
     const tamanoMaxGrandeAncho = Math.min((canvas.width - (4 * gapGrande)) / 5);
     const tamanoMaxGrandeAlto = Math.min((canvas.height - (15 * gapGrande)) / 16); // El alto es la mitad del ancho
@@ -57,9 +59,9 @@ const MyCanvas = () => {
     return () => {
       window.removeEventListener('resize', updateCanvasSize);
     };
-  }, []);
+  }, [coloreado]);
 
   return <canvas ref={canvasRef} style={{width:'100%', height:'100%', padding:'0 2.5px 2.5px 0' }}></canvas>;
 };
 
-export default MyCanvas;
+export default React.memo(MyCanvas);
